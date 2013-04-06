@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<ToolButtons>false</ToolButtons>
+
+	<Processes>	
+		<ProcessInfo>
+			<ProcessName>w3wp.exe</ProcessName>
+			<AppPool>test</AppPool>
+		</ProcessInfo>
+		
+		<!--
+		<ProcessInfo>
+			<ProcessName>d:\tmp\test.exe</ProcessName>
+		</ProcessInfo>
+		
+		<ProcessInfo>
+			<AttachToIIS>true</AttachToIIS>
+			<AppPool>test</AppPool>
+		</ProcessInfo>
+		-->
+		
+	</Processes>
+</Settings>
