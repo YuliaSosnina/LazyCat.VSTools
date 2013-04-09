@@ -51,12 +51,15 @@ namespace LazyCat.VSTools.AttachToPlugin
 
 		public bool Is(string process)
 		{
+			if (string.IsNullOrEmpty(process))
+				return false;
+
 			var processExt = Path.GetExtension(process);
-			var processDir = Path.GetDirectoryName(Path.GetFullPath(process));
+			var processDir = Path.GetDirectoryName(process);
 			var processName = Path.GetFileNameWithoutExtension(process);
 
 			var userProcessExt = Path.GetExtension(_processName);
-			var userProcessDir = Path.GetDirectoryName(Path.GetFullPath(_processName));
+			var userProcessDir = Path.GetDirectoryName(_processName);
 			var userProcessName = Path.GetFileNameWithoutExtension(_processName);
 
 			bool result = string.Compare(processName, userProcessName, StringComparison.OrdinalIgnoreCase) == 0;
@@ -82,7 +85,7 @@ namespace LazyCat.VSTools.AttachToPlugin
 
 		public string GetShortString()
 		{
-			string name = Path.GetFileNameWithoutExtension(ProcessName);
+			var name = Path.GetFileNameWithoutExtension(ProcessName);
 
 			if (!AttachToIIS || string.IsNullOrEmpty(AppPool))
 				return name;

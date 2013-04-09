@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<ToolButtons>false</ToolButtons>
+	<ToolButtons>true</ToolButtons>
 
 	<Processes>	
 		<ProcessInfo>
 			<ProcessName>w3wp.exe</ProcessName>
-			<AppPool>test</AppPool>
 		</ProcessInfo>
 		
 		<!--
