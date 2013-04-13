@@ -1,24 +1,33 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 using EnvDTE;
+using System.Linq;
 
 namespace LazyCat.VSTools.AttachToPlugin
 {
-	public class ProcessInfo
+	public class ProcessData
 	{
 		private const string IISProcess = "w3wp.exe";
 
-		private string _processName;
+		private string _name;
 		private bool _attachToIIS;
 
-		public string ProcessName
+		public ProcessData()
 		{
-			get { return _processName; }
+			CodeTypes = new List<string>();
+		}
+
+		public string Name
+		{
+			get { return _name; }
 			set
 			{
-				_processName = value;
+				_name = value;
 
-				if (string.IsNullOrEmpty(_processName))
+				if (string.IsNullOrEmpty(_name))
 				{
 					_attachToIIS = false;
 
@@ -38,11 +47,14 @@ namespace LazyCat.VSTools.AttachToPlugin
 				_attachToIIS = value;
 
 				if (_attachToIIS)
-					_processName = IISProcess;
+					_name = IISProcess;
 			}
 		}
 
 		public string AppPool { get; set; }
+
+		[XmlElement("CodeType")]
+		public List<string> CodeTypes { get; private set; }
 
 		public bool Is(Process process)
 		{
@@ -58,9 +70,9 @@ namespace LazyCat.VSTools.AttachToPlugin
 			var processDir = Path.GetDirectoryName(process);
 			var processName = Path.GetFileNameWithoutExtension(process);
 
-			var userProcessExt = Path.GetExtension(_processName);
-			var userProcessDir = Path.GetDirectoryName(_processName);
-			var userProcessName = Path.GetFileNameWithoutExtension(_processName);
+			var userProcessExt = Path.GetExtension(_name);
+			var userProcessDir = Path.GetDirectoryName(_name);
+			var userProcessName = Path.GetFileNameWithoutExtension(_name);
 
 			bool result = string.Compare(processName, userProcessName, StringComparison.OrdinalIgnoreCase) == 0;
 
@@ -75,22 +87,30 @@ namespace LazyCat.VSTools.AttachToPlugin
 
 		public string GetDisplayString()
 		{
-			string name = Path.GetFileName(ProcessName);
+			var builder = new StringBuilder(Path.GetFileName(Name));
 
-			if (!AttachToIIS || string.IsNullOrEmpty(AppPool))
-				return name;
+			if (AttachToIIS && !string.IsNullOrEmpty(AppPool))
+				builder.AppendFormat("[{0}]", AppPool);
 
-			return string.Format("{0}[{1}]", name, AppPool);
+			if (CodeTypes.Count > 0)
+				builder.AppendFormat("({0})", string.Join("/", CodeTypes));
+
+			return builder.ToString();
 		}
 
 		public string GetShortString()
 		{
-			var name = Path.GetFileNameWithoutExtension(ProcessName);
+			var builder = new StringBuilder(Path.GetFileNameWithoutExtension(Name));
 
-			if (!AttachToIIS || string.IsNullOrEmpty(AppPool))
-				return name;
+			if (AttachToIIS && !string.IsNullOrEmpty(AppPool))
+				builder.AppendFormat("_{0}", AppPool);
 
-			return string.Format("{0}_{1}", name, AppPool);
+			if (CodeTypes.Count > 0)
+				builder.AppendFormat("_{0}", string.Join("_", CodeTypes));
+
+			var str = builder.ToString();
+
+			return new string(str.Where(ch => char.IsLetterOrDigit(ch) || ch == '_').ToArray());
 		}
 	}
 }

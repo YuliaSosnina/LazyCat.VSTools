@@ -64,7 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AttachToPlugin\ISettingsProvider.cs" />
-    <Compile Include="AttachToPlugin\ProcessInfo.cs" />
+    <Compile Include="AttachToPlugin\ProcessData.cs" />
     <Compile Include="AttachToPlugin\Settings.cs" />
     <Compile Include="AttachToPlugin\SimpleSettingsProvider.cs" />
   </ItemGroup>

@@ -6,20 +6,20 @@ namespace LazyCat.VSTools.AttachToPlugin
 		{
 			var settings = new Settings();
 
-			settings.Processes.Add(new ProcessInfo
+			settings.Processes.Add(new ProcessData
 				{
 					AttachToIIS = true,
 					AppPool = "test"
 				});
 
-			settings.Processes.Add(new ProcessInfo
+			settings.Processes.Add(new ProcessData
 				{
-					ProcessName = "aaa"
+					Name = "aaa"
 				});
 
-			settings.Processes.Add(new ProcessInfo
+			settings.Processes.Add(new ProcessData
 				{
-					ProcessName = @"d:\tmp\test.exe"
+					Name = @"d:\tmp\test.exe"
 				});
 
 			return settings;

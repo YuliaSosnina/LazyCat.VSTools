@@ -1,22 +1,55 @@
 ﻿<?xml version="1.0"?>
 <Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<ToolButtons>true</ToolButtons>
+	
+	<DisplayInToolsMenu>true</DisplayInToolsMenu>
+	
+	<Process>
+		<AttachToIIS>true</AttachToIIS>
+	</Process>
 
-	<Processes>	
-		<ProcessInfo>
-			<ProcessName>w3wp.exe</ProcessName>
-		</ProcessInfo>
+	<Process>
+		<AttachToIIS>true</AttachToIIS>
+		<AppPool>test</AppPool>
+	</Process>
+
+	<Process>
+		<AttachToIIS>true</AttachToIIS>
+		<AppPool>test</AppPool>
+		<CodeType>Managed (v4.0)</CodeType>
+	</Process>
+
+	<Process>
+		<AttachToIIS>true</AttachToIIS>
+		<AppPool>test</AppPool>
+		<CodeType>Script</CodeType>
+	</Process>
+	
+	<!--
+	<Process>
+		<AttachToIIS>true</AttachToIIS>
+		<AppPool>test</AppPool>
+		<CodeType>Managed (v4.0)</CodeType>
+		<CodeType>Native</CodeType>
+	</Process>
+	
+	<Process>
+		<Name>test.exe</Name>
+	</Process>
+	-->
+	
+	<!--	
+		Possible code types:
 		
-		<!--
-		<ProcessInfo>
-			<ProcessName>d:\tmp\test.exe</ProcessName>
-		</ProcessInfo>
-		
-		<ProcessInfo>
-			<AttachToIIS>true</AttachToIIS>
-			<AppPool>test</AppPool>
-		</ProcessInfo>
-		-->
-		
-	</Processes>
+		Managed
+		Managed (v2.0, v1.1, v1.0)
+		Managed (v4.0)
+		Managed/Native
+		Native
+		Script
+		Silverlight
+		Trace
+		T-SQL
+		Workflow
+	-->
+	
 </Settings>

@@ -1,16 +1,18 @@
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace LazyCat.VSTools.AttachToPlugin
 {
 	public class Settings
 	{
-		private readonly List<ProcessInfo> _processes = new List<ProcessInfo>();
-
-		public List<ProcessInfo> Processes
+		public Settings()
 		{
-			get { return _processes; }
+			Processes = new List<ProcessData>();
 		}
 
-		public bool ToolButtons { get; set; }
+		public bool DisplayInToolsMenu { get; set; }
+
+		[XmlElement("Process")]
+		public List<ProcessData> Processes { get; private set; }
 	}
 }

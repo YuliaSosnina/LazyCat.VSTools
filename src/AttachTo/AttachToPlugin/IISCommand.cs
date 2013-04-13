@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EnvDTE;
 using EnvDTE80;
 using Microsoft.Web.Administration;
 
@@ -9,15 +8,15 @@ namespace LazyCat.VSTools.AttachToPlugin
 {
 	public class IISCommand : Command
 	{
-		public IISCommand(ProcessInfo info, DTE2 applicationObject) : base(info, applicationObject)
+		public IISCommand(ProcessData data, DTE2 applicationObject) : base(data, applicationObject)
 		{
 		}
 
-		public override IList<Process> GetProcessesToAttach(IList<Process> processes)
+		public override IList<Process2> GetProcessesToAttach(IList<Process2> processes)
 		{
-			if (!string.IsNullOrEmpty(ProcessInfo.AppPool))
+			if (!string.IsNullOrEmpty(ProcessData.AppPool))
 			{
-				var processIds = GetAppPoolProcessIds(ProcessInfo.AppPool);
+				var processIds = GetAppPoolProcessIds(ProcessData.AppPool);
 
 				if (processIds != null)
 					return processes.Where(p => processIds.Contains(p.ProcessID)).ToList();
