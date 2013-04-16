@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnvDTE;
 using EnvDTE80;
 using Microsoft.Web.Administration;
 
@@ -8,7 +9,8 @@ namespace LazyCat.VSTools.AttachToPlugin
 {
 	public class IISCommand : Command
 	{
-		public IISCommand(ProcessData data, DTE2 applicationObject) : base(data, applicationObject)
+		public IISCommand(ProcessData data, DTE2 applicationObject, AddIn addInInstance)
+			: base(data, applicationObject, addInInstance)
 		{
 		}
 

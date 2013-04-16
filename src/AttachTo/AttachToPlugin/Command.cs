@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
+using EnvDTE;
 using EnvDTE80;
 
 namespace LazyCat.VSTools.AttachToPlugin
 {
 	public class Command
 	{
-		public Command(ProcessData data, DTE2 applicationObject)
+		public Command(ProcessData data, DTE2 applicationObject, AddIn addInInstance)
 		{
 			ProcessData = data;
 
 			_applicationObject = applicationObject;
 
 			Name = data.GetShortString();
+			FullName = string.Format("{0}.{1}", addInInstance.ProgID, Name);
 			DisplayText = string.Format("Attach to {0}", data.GetDisplayString()); 
 			Description = string.Format("Attach to process {0}", data.GetDisplayString());
 		}
@@ -20,6 +22,7 @@ namespace LazyCat.VSTools.AttachToPlugin
 		public ProcessData ProcessData { get; set; }
 
 		public string Name { get; set; }
+		public string FullName { get; set; }
 		public string DisplayText { get; set; }
 		public string Description { get; set; }
 
