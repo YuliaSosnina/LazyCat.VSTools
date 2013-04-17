@@ -54,7 +54,7 @@ namespace LazyCat.VSTools.AttachToPlugin
 		public string AppPool { get; set; }
 
 		[XmlElement("CodeType")]
-		public List<string> CodeTypes { get; private set; }
+		public List<string> CodeTypes { get; set; }
 
 		public bool Is(Process process)
 		{

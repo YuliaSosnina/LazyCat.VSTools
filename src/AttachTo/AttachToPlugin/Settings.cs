@@ -13,6 +13,6 @@ namespace LazyCat.VSTools.AttachToPlugin
 		public bool DisplayInToolsMenu { get; set; }
 
 		[XmlElement("Process")]
-		public List<ProcessData> Processes { get; private set; }
+		public List<ProcessData> Processes { get; set; }
 	}
 }
